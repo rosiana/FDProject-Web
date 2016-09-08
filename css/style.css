@@ -133,6 +133,10 @@ line.link {
   padding-bottom: 0;
 }
 
+#chart-2 {
+  margin-top: 30px;
+}
+
 #lpse_selection {
   margin-top: -10px;
 }
@@ -154,9 +158,10 @@ line.link {
   color: white;
 }
 
-/*
-.btn-info-container {
-  margin-right: 10px;
+#count {
+  margin-top : 7px;
 }
-*/
 
+#myModal {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}

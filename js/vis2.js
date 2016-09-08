@@ -219,12 +219,12 @@ Network = function() {
       element = d3.select(this);
       match = d.name.toLowerCase().search(searchRegEx);
       if (searchTerm.length > 0 && match >= 0) {
-        element.style("fill", "#F38630").style("stroke-width", 2.0).style("stroke", "#555");
+        element.style("fill", "#90a9bd").style("stroke-width", 2.0).style("stroke", "#555");
         return d.searched = true;
       } else {
         d.searched = false;
         return element.style("fill", function(d) {
-          return nodeColors(d.group);
+          return "#90a9bd";
         }).style("stroke-width", 1.0);
       }
     });
@@ -367,9 +367,9 @@ Network = function() {
     }).attr("r", function(d) {
       return d.jumlahmenang / 3;
     }).style("fill", function(d) {
-      return nodeColors(d.group);
+      return "#90a9bd";
     }).style("fill-opacity", 1).style("stroke", function(d) {
-      return strokeFor(d);
+      return "#456681";
     }).style("stroke-width", 1);
     node.on("mouseover", showDetailsNode).on("mouseout", hideDetailsNode);
     return node.exit().remove();
@@ -379,7 +379,7 @@ Network = function() {
       return d.source.id + "_" + d.target.id;
     });
     link.enter().append("line").attr("class", "link").attr("stroke", function(d) {
-      if (d.value == 2) return "#ff0000"; else return "#ddd";
+      return "#ddd";
     }).style("stroke-width", function(d) {
       return (d.jumlahlelangsama/2);
     }).attr("stroke-opacity", 0.8).attr("x1", function(d) {
@@ -499,7 +499,7 @@ Network = function() {
         if (l.source === d || l.target === d) {
           return "#555";
         } else {
-          if (d.value == 2) return "#ff0000"; else return "#ddd";
+          return "#ddd";
         }
       }).attr("stroke-opacity", function(l) {
         if (l.source === d || l.target === d) {
@@ -567,12 +567,12 @@ Network = function() {
       }
     });
     if (link) {
-      return link.attr("stroke", function(d) {if (d.value == 2) return "#ff0000"; else return "#ddd";}).attr("stroke-opacity", function(d) {return d.jumlahlelangsama/2; });
+      return link.attr("stroke", function(d) {return "#ddd";}).attr("stroke-opacity", function(d) {return d.jumlahlelangsama/2; });
     }
   };
   hideDetailsLink = function(d, i) {
     tooltip.hideTooltip();    
-    return d3.select(this).style("stroke", function(d) {if (d.value == 2) return "#ff0000"; else return "#ddd";}).style("stroke-width", function(d) {return d.jumlahlelangsama/2; });
+    return d3.select(this).style("stroke", function(d) {return "#ddd";}).style("stroke-width", function(d) {return d.jumlahlelangsama/2; });
   };
   return network;
 };

@@ -13,7 +13,7 @@ $idxLPSE = 0;
 $idxAgency = 0;
 $arrNodes = array();
 $arrLinks = array(); 
-if ($result = $mysqli->query("select distinct peserta, jumlahmenang from indikasi3coba where jumlahlelangsama >= 3")) {
+if ($result = $mysqli->query("select distinct peserta, jumlahmenang from indikasi3tes2 where jumlahlelangsama >= 3")) {
     $rows = array();     
         while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 $rows[] = $row;
@@ -24,7 +24,7 @@ if ($result = $mysqli->query("select distinct peserta, jumlahmenang from indikas
         } 
 }
 
-if ($result = $mysqli->query("select distinct peserta, linkto, jumlahlelangsama, daftarlelangsama, kasus from indikasi3coba where linkto is not null and jumlahlelangsama >= 5")) {
+if ($result = $mysqli->query("select distinct peserta, linkto, jumlahlelangsama, daftarlelangsama, kasus from indikasi3tes2 where linkto is not null and jumlahlelangsama >= 3")) {
     $rows = array();     
         while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 $rows[] = $row;

@@ -66,26 +66,31 @@
                     </li>
                 </ul>
             </div>
+            <div class="collapse navbar-collapse" id="control-panel-nav-3">
+                <div class="row">
+                  <div class="col-md-7">
+                  <div class="row control-panel">
+                    <div class="col-md-4">
+                      <div class="panel-title">Batasi network</div>
+                      <input id="thresholdSlider" data-slider-id='ex1Slider' type="text" data-slider-min="5" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-tooltips="hide" data-slider-handle="round"/>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="panel-title">Batasi jumlah peserta lelang</div>
+                      <input id="thresholdSlider2" data-slider-id='ex2Slider' type="text" data-slider-min="10" data-slider-max="30" data-slider-step="1" data-slider-value="5" data-slider-tooltips="hide" data-slider-handle="round"/>
+                    </div>
+                  </div>
+                </div>                
+                  <div class="col-md-2 col-md-offset-3 btn-info-container">
+                  <button type="button" class="btn btn-default btn-info pull-right" data-toggle="popover" data-content="Indikasi III menunjukkan kerjasama antar peserta lelang, dapat dilihat dari jaringan yang terbentuk yang mnghubungkan lingkaran peserta lelang." data-placement="bottom"><span class="glyphicon glyphicon-info-sign"></span> Info Indikasi</button>
+                  </div>
+              </div>
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
 
-    <section id="chart">
-        <div class="row">
-            <div class="col-md-4">
-            <div class="row control-panel">
-              <div class="col-md-6">
-                <div class="panel-title">Batasi network</div>
-                <input id="thresholdSlider" data-slider-id='ex1Slider' type="text" data-slider-min="5" data-slider-max="15" data-slider-step="1" data-slider-value="5" data-slider-tooltips="hide"/>
-              </div>
-              <div class="col-md-6">
-                <div class="panel-title">Batasi jumlah node</div>
-                <input id="thresholdSlider2" data-slider-id='ex1Slider' type="text" data-slider-min="5" data-slider-max="15" data-slider-step="1" data-slider-value="5" data-slider-tooltips="hide"/>
-              </div>
-            </div>
-          </div>
-        </div>
+    <section id="chart">        
         <div id="main" role="main">
             <div id="vis"></div>
           </div>
@@ -136,6 +141,7 @@
         $('#thresholdSlider2').slider({
           value: 0
         });
+        $("[data-toggle=popover]").popover();
         // With JQuery
     $('#thresholdSlider').slider({
       formatter: function(value) {

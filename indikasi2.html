@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/slider.css">
 
+    <script src="js/libs/modernizr-2.0.6.min.js"></script>
+
     <script type="text/javascript" src="assets/js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="assets/js/plotly-latest.min.js"></script>
     <script type="text/javascript" src="assets/js/d3.min.js"></script>
@@ -74,60 +76,61 @@
                     </li>
                 </ul>
             </div>
+            <div class="collapse navbar-collapse" id="control-panel-nav-2">
+                <div class="row">
+                  <div class="col-md-7">
+                  <div class="row control-panel" data-num="0">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                          <select class="form-control lpse-data">
+                              <option>Semua LPSE</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <select class="form-control year-data">
+                              <option>Semua Tahun</option>
+                          </select>
+                      </div>
+                  </div>                   
+                  <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-default nextprev" id="prev"><i class="fa fa-angle-left fa-fw arrowleft"></i></button>
+                            </div>
+                            <div class="col-md-3" id="count" style="text-align: center;">
+                                1 / 20
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-default nextprev next" id="next"><i class="fa fa-angle-right fa-fw arrowright"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>                
+                  <div class="col-md-2 col-md-offset-3 btn-info-container">
+                  <button type="button" class="btn btn-default btn-info pull-right" data-toggle="popover" data-content="Indikasi II menunjukkan kurangnya transparansi dalam pelaksanaan lelang dan pemilihan pemenang oleh ULP, ditandai dengan nilai harga pemenang yang sangat mendekati HPS (perbandingan mendekati 1) dan adanya penawaran yang dimenangkan meski ada penawaran lain yang lebih rendah (klik titik untuk melihat penawaran lain)." data-placement="bottom"><span class="glyphicon glyphicon-info-sign"></span> Info Indikasi</button>
+                  </div>
+              </div>
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
 
-    <section id="chart">
-             
-      <div class="row">
+    <section id="chart">        
+        <div class="row">
           <div class="col-md-12">
-              <div data-num="0">
-                  <div class="row header-chart">
-                      <div class="col-md-12">
-                          <div class="col-md-6 col-md-offset-6">
-                              <div class="row">
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <select class="form-control lpse-data">
-                                              <option>Semua LPSE</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <select class="form-control year-data">
-                                              <option>Semua Tahun</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <div class="row">
-                                          <div class="col-md-3">
-                                              <button type="button" class="btn btn-default nextprev" id="prev"><i class="fa fa-angle-left fa-fw arrowleft"></i></button>
-                                          </div>
-                                          <div class="col-md-6" id="count" style="text-align: center;">
-                                              1 / 20
-                                          </div>
-                                          <div class="col-md-3">
-                                              <button type="button" class="btn btn-default nextprev next" id="next"><i class="fa fa-angle-right fa-fw arrowright"></i></button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12">
-                          <div id="myDiv" style="width : 1340px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-                      </div>
-                  </div>
-              </div>
+              <div id="myDiv" style="width : 1340px; height: 400px; margin-top: 30px;"><!-- Plotly chart will be drawn inside this DIV --></div>
           </div>
       </div>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    </section>
+
+
+
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                   <div class="modal-header">
@@ -192,7 +195,6 @@
               </div>
           </div>
       </div>
-    </section>
 
 
     <!-- jQuery -->
@@ -220,7 +222,6 @@
       <script src="js/ind2.js"></script>
       <script src="js/bootstrap-slider.js"></script>
 
-
       <!-- Metis Menu Js -->
       <script src="assets/js/jquery.metisMenu.js"></script>
 
@@ -232,14 +233,10 @@
         Modernizr.load({
           load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
         });
-        $('#thresholdSlider').slider({
-          value: 0
-        });
-        $('#thresholdSlider2').slider({
-          value: 0
-        });
+        $("[data-toggle=popover]").popover();
       </script>
 
     </body>
 
 </html>
+

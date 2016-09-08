@@ -32,15 +32,12 @@ $(document).ready(function () {
                         listofYear = [],
                         currentYear,
                         currentVal = [],
-                        currentID = [],
-
-                        allIdx =[],
-                        currentIdx = [],
+                        currentID = [],                  
 
 
                         currentKasus = [],
 
-                        currentIdx = [];
+                        currentIdx = [],
 
                         allValKasus = [],
                         allIDKasus = [],
@@ -97,7 +94,7 @@ $(document).ready(function () {
                           currentLine[i] = 1;
                           currentIdx[i] = i;
                         }
-                        console.log(currentIdx);
+                        console.log(currentLine);
                     }
                     else {
                       var idYear = (allYear.map(filterBy(chosenYear))).filter(notUndefined); 
@@ -201,11 +198,20 @@ $(document).ready(function () {
                 Plotly.newPlot('myDiv', data, layout, {displayModeBar: true, displaylogo: false});
 
 
+
+                Number.prototype.format = function(n, x, s, c) {
+                    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+                            num = this.toFixed(Math.max(0, ~~n));
+
+                    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+                };
+
+
                 myPlot.on('plotly_click', function(data1){
                     var id, nama, lpse, tahun, pemenang, pagu, hps, penawaran, status, agency, satker, kategori, jenis = '';
-                    console.log(currentIdx);
                     for(var i=0; i < data1.points.length; i++){
                           var j = data1.points[i].pointNumber;
+                          console.log(currentIdx[j]);
                           id = allID[currentIdx[j]];
                           nama = allName[currentIdx[j]];
                           lpse = allLPSE[currentIdx[j]];
@@ -272,7 +278,7 @@ $(document).ready(function () {
                             y: allHargaDrill,
                             type: 'bar',
                             marker: {
-                                color: 'rgb(101, 131, 155)',
+                                color: 'rgb(200, 200, 200)',
                                 size: 6
                             }
                         };
@@ -282,7 +288,7 @@ $(document).ready(function () {
                             y: menangHargaDrill,
                             type: 'bar',
                             marker: {
-                                color: 'rgb(174, 55, 47)',
+                                color: 'rgb(101, 131, 155)',
                                 size: 6
                             }
                         };
@@ -319,7 +325,6 @@ $(document).ready(function () {
                 }
 
                 var innerContainer = document.querySelector('[data-num="0"'),
-                        plotEl = innerContainer.querySelector('.plot'),
                         lpseSelector = innerContainer.querySelector('.lpse-data'),
                         yearSelector = innerContainer.querySelector('.year-data');
 
@@ -342,13 +347,6 @@ $(document).ready(function () {
 
                 lpseSelector.addEventListener('change', update, false);
                 yearSelector.addEventListener('change', update, false);
-
-                Number.prototype.format = function(n, x, s, c) {
-                    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
-                            num = this.toFixed(Math.max(0, ~~n));
-
-                    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
-                };
 
                 $('#next').click({param: 0}, relay);
                 $('#prev').click({param: 1}, relay);
@@ -395,5 +393,5 @@ $(document).ready(function () {
                     };
                     Plotly.relayout(myPlot, update);
                 }
-            }, 1000000000000000);
+            });
         });

@@ -190,28 +190,27 @@ Network = function() {
     allData.nodes = [];
     allData.links = graphRec.links;
     for (var i = 0; i < graphRec.nodes.length; i++) {
-      if ((graphRec.nodes[i].group === 3) && (graphRec.nodes[i].jumlahlelangsatker > thresh)) {
+      if (graphRec.nodes[i].group === 1 || graphRec.nodes[i].group === 2){
         allData.nodes.push(graphRec.nodes[i]);
+      }
+      else
+      if ((graphRec.nodes[i].group === 3) && (graphRec.nodes[i].jumlahlelangsatker >= thresh)) {
+        allData.nodes.push(graphRec.nodes[i]); 
         for (var j = 0; j < graphRec.nodes.length; j++) {
-          if (neighboring(graphRec.nodes[i],graphRec.nodes[j])) {
-            if (((graphRec.nodes[j].group === 4) || (graphRec.nodes[j].group === 5)) && (graphRec.nodes[j].jumlahmenang > thresh2)) {
-              exist = true;
-              allData.nodes.push(graphRec.nodes[j]);
-            }
-            else {
-              if (graphRec.nodes[j].group === 2 || graphRec.nodes[j].group === 1) {
-                allData.nodes.push(graphRec.nodes[j]);
-              }
-            }
+          if (graphRec.nodes[j].group === 4 && neighboring(graphRec.nodes[i],graphRec.nodes[j]) && graphRec.nodes[j].jumlahmenang >= thresh2) {
+            allData.nodes.push(graphRec.nodes[j]);
           }
-          else {
-            if (graphRec.nodes[j].group === 1){
-              allData.nodes.push(graphRec.nodes[j]);
-            }
+          if (graphRec.nodes[j].group === 5 && neighboring(graphRec.nodes[i],graphRec.nodes[j]) && graphRec.nodes[j].jumlahmenang >= thresh2) {
+            allData.nodes.push(graphRec.nodes[j]);
           }
-        } 
+        }              
       }
     }
+    var unique = allData.nodes;
+    allData.nodes = [];
+    $.each(unique, function(i, el){
+        if($.inArray(el, allData.nodes) === -1) allData.nodes.push(el);
+    });
     return allData;
   };
   update = function() {
@@ -286,8 +285,8 @@ Network = function() {
     circleRadius = d3.scale.sqrt().range([3, 12]).domain(countExtent);
     data.nodes.forEach(function(n) {
       var randomnumber;
-      n.x = randomnumber = Math.floor(Math.random() * width);
-      n.y = randomnumber = Math.floor(Math.random() * height);
+      n.x = randomnumber = Math.floor(Math.random() * 1366);
+      n.y = randomnumber = Math.floor(Math.random() * 1366);
       return n.radius = circleRadius(n.group);
     });
     nodesMap = mapNodes(data.nodes);
@@ -303,6 +302,8 @@ Network = function() {
 
       }
     });
+    console.log("nodessetup " + data.nodes);
+    console.log("linkssetup " + data.links);
     return data;
   };
   mapNodes = function(nodes) {
@@ -636,6 +637,7 @@ $(function() {
     $('#thresholdSlider').slider('setValue', 5);
     $('#thresholdSlider2').slider('setValue', 5);
     return d3.json("data/" + songFile, function(json) {
+      graphRec=JSON.parse(JSON.stringify(json));
       return myNetwork.updateData(json);
     });
   });
